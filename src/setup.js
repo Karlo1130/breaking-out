@@ -47,6 +47,7 @@ function createLvl3() {
 
 function finishGame() {
     blocks = []
+    isFinish = !isFinish
 }
 
 function createBlocks(rows, columns) {
@@ -123,11 +124,6 @@ function drawLives() {
     fill(0)
     textSize(25)
     text(`lives: ${lives}`, 600, 380)
-}
-
-function finishGame() {
-    isFinish = !isFinish
-    
 }
 
 function drawFinishGame() {
