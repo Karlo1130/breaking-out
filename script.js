@@ -3,12 +3,19 @@ function setup() {
 }
 
 function draw() {
+    if (!isFinish) {
+        drawFinishGame()
+        return
+    }
     background(150)
+    drawPoints()
+    drawLives()
     ball.draw()
     player.draw()
     blocks.forEach(block => {
         block.draw()
     });
+
 
     update()
 }
@@ -19,8 +26,8 @@ function keyPressed() {
     }
 
     if (keyCode == 82) {
-        ball.x = 350
         ball.y = 300
+        ball.x = 350
         ball.xVelocity = 0
         ball.yVelocity = 0
 
@@ -28,6 +35,8 @@ function keyPressed() {
         player.y = 350
 
         blocks = []
+
+        lives = 3
 
         switch (lvl) {
             case 1:
@@ -68,6 +77,7 @@ function update() {
         }
 
         if(block.durability == 0){
+            points++
             blocks.splice(blocks.indexOf(block), 1)
         }
     })
@@ -89,25 +99,25 @@ function update() {
     else if (isColliding(player, ball)) {
         ball.xVelocity = 0
     }
+    
+    if (blocks.length == 0) {
 
-    if (lvl == 1) {
-        if (blocks.length == 0) {
+        if (lvl == 1) {
             lvl = 2
             createLvl2()
         }
-    }
 
-    else if (lvl == 2) {
-        if (blocks.length == 0) {
+        else if (lvl == 2) {
             lvl = 3
             createLvl3()
         }
-    }
 
-    else if (lvl == 3) {
-        if (blocks.length == 0) {
+        else if (lvl == 3) {
             finishGame()
         }
     }
 
+    if (ball.y >= 400) {
+        loseLive()
+    }
 }

@@ -7,6 +7,8 @@ var lvl = 1
 var lives = 3
 var points = 0
 
+var isFinish = false
+
 createLvl1()
 
 function createLvl1() {
@@ -96,4 +98,44 @@ function isCollidingY(block, ball){
     }
 
     return false;
+}
+
+function loseLive() {
+    lives--
+
+    ball.y = 300
+    ball.x = 350
+    ball.xVelocity = 0
+    ball.yVelocity = 0
+
+    player.x = 300
+    player.y = 350
+
+}
+
+function drawPoints() {
+    fill(0)
+    textSize(25)
+    text(`points: ${points}`, 10, 380)
+}
+
+function drawLives() {
+    fill(0)
+    textSize(25)
+    text(`lives: ${lives}`, 600, 380)
+}
+
+function finishGame() {
+    isFinish = !isFinish
+    
+}
+
+function drawFinishGame() {
+    fill(0)
+    rect(0, 0, 700, 400)
+
+    fill(255)
+    textSize(50)
+    text(`Has Ganado`, 210, 200)
+    text(`Puntaje: ${points}`, 240, 250)
 }
