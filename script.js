@@ -3,7 +3,7 @@ function setup() {
 }
 
 function draw() {
-    if (!isFinish) {
+    if (isFinish) {
         drawFinishGame()
         return
     }
